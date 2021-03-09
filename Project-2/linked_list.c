@@ -11,10 +11,12 @@
 /* --------------------------------------------------------------------------*/
 job_t *pop(job_t **node) {
   job_t *head = *node;
-
-  *node = head->next;
+  job_t *cur = head;
   
-  return head;
+  *node = (*node)->next;
+
+  
+  return cur;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -86,13 +88,13 @@ void remove_job(job_t **node, int id) {
 job_t *remove_SJ(job_t **node) {
     job_t *head = *node;    // ptr to head of list
     job_t *cur = *node;     // ptr to current node
-    job_t *prev = NULL;     // ptr to prev node
-    job_t *curRef = NULL;   // ptr to shortest length job
-    job_t *prevRef = NULL;  // ptr to prev node of shortest length job
+    job_t *prev = *node;     // ptr to prev node
+    job_t *curRef = *node;   // ptr to shortest length job
+    job_t *prevRef = *node;  // ptr to prev node of shortest length job
 
     int len = INT_MAX;
     while(cur != NULL) {
-      if(cur->length < len) {
+      if(cur->length < len) { // want jobs that came first
         len = cur->length;
         curRef = cur;
         prevRef = prev;
@@ -150,27 +152,26 @@ bool search(job_t **node, int id) {
 /* --------------------------------------------------------------------------*/
 void insert(job_t **node, int id, int length) {
 
+  job_t *cur = *node;
   job_t *head = *node;
   job_t *newNode = (job_t*)malloc(sizeof(job_t));
 
   newNode->id = id;
   newNode->length = length;
+  newNode->next = NULL;
 
   if(head == NULL) {
     *node = newNode;
     return;
-  } 
-  
-  while(true) {
-    if((*node)->next == NULL) {
-      (*node)->next = newNode;
-      break;
-    }
-
-    *node = (*node)->next;
   }
 
-  *node = head;
+  while(cur->next != NULL) {
+    cur = cur->next;
+  }
+
+  *node = cur;
+  (*node)->next = newNode;
+  (*node) = head;
 
 }
 

@@ -24,7 +24,7 @@ void test_init_destroy(){
   void *buff = NULL;
   node_t *header = NULL;
   
-  printf(">> Testing initialization.\n");
+  printf(">> Testing initialization. (test_init_destroy)\n");
 
   // The init function must adjust the arena size to be a multiple of pagesize.  
   arena_size = init(1);
@@ -51,7 +51,7 @@ void test_allocation_basic(){
   void *buff, *buff2 = NULL;
   node_t *header = NULL;
  
-  printf(">> Testing allocations without the possibility to split. No Frees.\n");
+  printf(">> Testing allocations without the possibility to split. No Frees. (test_allocation_basic)\n");
 
   buff = walloc(page_size);
   assert(statusno == ERR_UNINITIALIZED);
@@ -88,7 +88,7 @@ void test_allocationfree_placement(){
   void *buff, *buff2,  *buff3;
   node_t *header = NULL;
  
-  printf(">> Testing basic allocation free placement.\n");
+  printf(">> Testing basic allocation free placement. (test_allocationfree_placement)\n");
 
   // Test: Create two allocatations.
   // Free first allocation but leave the second allocation in place. 
@@ -195,7 +195,7 @@ void test_free_basic(){
   void *buff;
   node_t *header; 
 
-  printf(">>Testing frees without coalescing.\n");
+  printf(">>Testing frees without coalescing. (test_free_basic)\n");
   init(page_size);
   size = page_size - sizeof(node_t);
   buff = walloc(size); 
@@ -240,7 +240,7 @@ void test_free_coalescing_case3(){
   assert(header2->is_free == 0);
 
   wfree(buff2);
-  assert(header2->is_free = 1);
+  assert(header2->is_free == 1);
   assert(header2->size == size2);
 
   //this should cause coalescing. 
@@ -288,7 +288,7 @@ void test_free_coalescing_case2(){
   assert(header2->is_free == 0);
 
   wfree(buff); 
-  assert(header->is_free = 1);
+  assert(header->is_free == 1);
   assert(header->size == size);
 
   //this should cause coalescing. 
@@ -345,8 +345,8 @@ void test_free_coalescing_case1(){
   wfree(buff); 
   wfree(buff3);
 
-  assert(header->is_free = 1);
-  assert(header3->is_free = 1);
+  assert(header->is_free == 1);
+  assert(header3->is_free == 1);
 
   assert(header->size == size);
   assert(header3->size == size3);
@@ -449,16 +449,16 @@ void test_free_coalescing_chains_bwd(){
 
 
 int main() {
-  //test_init_destroy();
-  //test_allocation_basic();
-  //test_free_basic();
-  //test_allocation_withsplits(); 
-  //test_allocationfree_placement();
+  test_init_destroy();
+  test_allocation_basic();
+  test_free_basic();
+  test_allocation_withsplits(); 
+  test_allocationfree_placement();
   test_free_coalescing_case1();
-  //test_free_coalescing_case2();
-  //test_free_coalescing_case3();
-  //test_free_coalescing_chains_fwd();
-  //test_free_coalescing_chains_bwd();
+  test_free_coalescing_case2();
+  test_free_coalescing_case3();
+  test_free_coalescing_chains_fwd();
+  test_free_coalescing_chains_bwd();
 
   printf("All tests passed!\n");
 }

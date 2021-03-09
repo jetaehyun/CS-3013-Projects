@@ -38,6 +38,9 @@ Initializing arena:
 ...error: requested size larger than MAX_ARENA_SIZE (2147483647)
 Destroying Arena:
 ...error: cannot destroy unintialized arena. Setting error status
+
+
+
 >> Testing allocations without the possibility to split. No Frees.
 Error: Unitialized. Setting status code
 Initializing arena:
@@ -68,6 +71,9 @@ Allocating memory:
 ...setting error code
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
+
 >>Testing frees without coalescing.
 Initializing arena:
 ...requested size 4096 bytes
@@ -96,6 +102,9 @@ Freeing allocated memory:
 ...coalescing not needed.
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
+
 >>Testing allocations with splits.
 Initializing arena:
 ...requested size 4096 bytes
@@ -173,6 +182,7 @@ Header->bwd: 0x7fc0a2671000
 Header->is_free: 0
 Destroying Arena:
 ...unmapping arena with munmap()
+
 >> Testing basic allocation free placement.
 Initializing arena:
 ...requested size 4096 bytes
@@ -225,6 +235,8 @@ Allocating memory:
 ...allocation starts at 0x7fc0a2671020
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
 >>Testing frees with coalescing. Case 1.
 Initializing arena:
 ...requested size 4096 bytes
@@ -303,6 +315,9 @@ Header->bwd: (nil)
 Header->is_free: 1
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
+
 >>Testing frees with coalescing. Case 2.
 Initializing arena:
 ...requested size 4096 bytes
@@ -360,6 +375,7 @@ Header->bwd: (nil)
 Header->is_free: 1
 Destroying Arena:
 ...unmapping arena with munmap()
+
 >>Testing frees with coalescing. Case 2.
 Initializing arena:
 ...requested size 4096 bytes
@@ -417,6 +433,9 @@ Header->bwd: (nil)
 Header->is_free: 1
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
+
 >>Testing frees with coalescing chaining
 Initializing arena:
 ...requested size 4096 bytes
@@ -500,6 +519,10 @@ Header->bwd: (nil)
 Header->is_free: 1
 Destroying Arena:
 ...unmapping arena with munmap()
+
+
+
+
 >>Testing frees with coalescing chaining
 Initializing arena:
 ...requested size 4096 bytes

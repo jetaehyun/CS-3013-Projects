@@ -1,6 +1,5 @@
 #include <stdbool.h>
 #include <stdlib.h>
-#include <time.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -32,6 +31,7 @@ int main(int argc, char **argv){
   if (strncmp(argv[1], "FIFO", 4) == 0) {
 
     FIFO(&node, length);                    // FIFO policy implementation
+    node = NULL;
     length = populateJobs(argv[2], &node);  // repopulate linked list of jobs since FIFO() will finish jobs and free it to simulate job executions
     FIFO_Analyze(&node, length);            // FIFO policy metrics
 
