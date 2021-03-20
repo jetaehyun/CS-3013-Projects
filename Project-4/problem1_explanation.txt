@@ -1,0 +1,9 @@
+Tae Hyun Je
+
+Problem 1:
+
+To prevent a performer from being deprived, I implemented random placement and limits. When the performer threads are created, each performer is given a random number ranging
+from 0-3, indicating which stage they are expected to perform in. There are a total of 25 performers, so each stage will have 6 performers except 1, which will have 7. This
+disperses the performers randomly and, in theory, fairly. Furthermore, to prevent a juggler, dancer, or soloist performer type from occupying the stage(s), the program keeps
+track of which type performed last, this was used to ensure that different performers had a chance to go on stage. Each stage and performer uses a combination of wait() and 
+signal() calls to notify each other that a performer has finished or if the stage is now open. Performers that are not performing are suspended ("napping").

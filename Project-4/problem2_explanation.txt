@@ -1,0 +1,9 @@
+Tae Hyun Je
+Project 4
+Problem 2
+
+The implementation that I created was the first solution recommended to us in class, reservations. Assuming the situation is permissible, a worker will be able to process
+a package after pulling it from the queue. Any packages that require a certain station but is currently occupied, they will have to wait until it is open. This method is
+works because out of the 4 deadlock conditions, it prevents the hold-and-wait because each worker obtains a sem when they are able to. However, it does potentially promote
+starvation because if a worker requires, say, all 4 stations, they might not be able to get the opportunity to reserve it. This is because other packages that require
+less stations might request reservation before it has a chance to reserve.
